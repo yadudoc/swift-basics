@@ -1,3 +1,7 @@
+/*
+	Begin with a tribute to the gods of programming
+	Hello World!
+ */
 type file;
 
 app (file out) greet() {

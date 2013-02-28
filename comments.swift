@@ -16,3 +16,7 @@
    Sidenote: Swift caught my comment with only opening slash-star
    as a grammer error  saying that a second star was expected
 */
+
+/*
+ * Doxygen style ? Works!
+ */
