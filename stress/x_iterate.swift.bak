@@ -1,0 +1,11 @@
+/*
+	Iterate loops with variable number of loops
+	to be called with cmdline arg -loops=<Number>
+*/
+
+int limit   = @toint(@arg("loops")); 
+int result[];
+
+iterate current {
+	result[current] = current+1;
+} until ( current > limit );
