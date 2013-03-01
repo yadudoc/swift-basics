@@ -1,15 +1,19 @@
 /*
 	Test reliability of function calls over large scale
 
-	stats: 10K  -> 5s
-	       100K -> 32.3s
+	tested on : 0.94
+	using ints
+
+	stats: 1K   -> 3.059s
+	       10K  -> 5.047s (result is probably wrong)
+	       100K -> 31.85s
 	       1M   -> Exception in thread "Hang checker"
 	       java.lang.StackOverflowError
 	       at java.util.HashMap.put(HashMap.java:484)
 	       at java.util.HashSet.add(HashSet.java:217)
  */
 
-int limit   = @toint(@arg("loops"));
+int limit   = @toInt(@arg("loops"));
 int range[] = [2:limit:1];
 int array[];
 
