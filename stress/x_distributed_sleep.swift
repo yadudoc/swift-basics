@@ -1,6 +1,7 @@
 /*
 	Foreach loops with variable number of loops
 	to be called with cmdline arg -loops=<Number>
+	todo: measure actual times with expected times.
 */
 
 int limit   = @toint(@arg("loops")); 

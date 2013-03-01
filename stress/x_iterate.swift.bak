@@ -1,7 +1,10 @@
 /*
 	Iterate loops with variable number of loops
 	to be called with cmdline arg -loops=<Number>
+	todo: Why does this script fail to compile ?
 */
+
+
 
 int limit   = @toint(@arg("loops")); 
 int result[];
