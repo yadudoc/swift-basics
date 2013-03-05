@@ -1,0 +1,22 @@
+Warning: Function toint is deprecated, at 13
+Swift 0.94RC3 swift-r6268 cog-r3605
+
+RunID: 20130305-2012-h82d4ri9
+Progress:  time: Tue, 05 Mar 2013 20:12:05 +0530
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10001.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10010.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10009.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10004.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10007.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10000.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10006.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10003.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10008.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10005.out 
+Filename is home/yadu/src/swift-basics/stress/apps/OUT/mapred10002.out 
+Progress:  time: Tue, 05 Mar 2013 20:12:06 +0530  Selecting site:8  Stage in:1  Finished successfully:2
+Progress:  time: Tue, 05 Mar 2013 20:12:08 +0530  Selecting site:6  Stage in:1  Finished successfully:4
+Progress:  time: Tue, 05 Mar 2013 20:12:09 +0530  Selecting site:4  Stage in:1  Finished successfully:6
+Progress:  time: Tue, 05 Mar 2013 20:12:10 +0530  Selecting site:2  Stage in:1  Finished successfully:8
+Progress:  time: Tue, 05 Mar 2013 20:12:11 +0530  Stage in:1  Finished successfully:10
+Final status: Tue, 05 Mar 2013 20:12:11 +0530  Finished successfully:11
