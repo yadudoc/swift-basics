@@ -10,7 +10,8 @@
 	       100K -> ?
 	       1M   -> java.langOutOfMemoryError thrown
 	       10M  -> ?
-
+#NIGHTLY 1000
+#WEEKLY  1000 10000
 */
 
 int limit   = @toint(@arg("loops"));

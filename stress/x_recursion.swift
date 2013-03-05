@@ -24,7 +24,10 @@ java.lang.StackOverflowError
 	at org.globus.cog.karajan.util.ThreadingContext.toString(ThreadingContext.java:87)
 	at org.globus.cog.karajan.util.ThreadingContext.toString(ThreadingContext.java:87)
 
-	       100K -> ? 
+	       100K -> ?
+
+#NIGHTLY 1000 10000
+#WEEKLY  1000 10000 100000
 */
 
 int limit = @toint(@arg("loops"));

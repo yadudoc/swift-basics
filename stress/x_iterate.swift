@@ -7,6 +7,8 @@
 	stats: 100k -> 17s (core i5)
 	       1M   -> java.langOutOfMemoryError thrown
 
+#NIGHTLY 1000 10000 100000
+#WEEKLY  1000 10000 100000 1000000
 */
 
 int limit   = @toint(@arg("loops"));

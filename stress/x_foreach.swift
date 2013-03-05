@@ -1,6 +1,9 @@
 /*
 	Foreach loops with variable number of loops
 	to be called with cmdline arg -loops=<Number>
+
+#NIGHTLY 1000 10000 
+#WEEKLY  1000 10000 100000
 */
 
 int limit   = @toint(@arg("loops")); 
