@@ -1,0 +1,13 @@
+/*
+	Pattern X
+	The most common pattern that we see is the mapreduce pattern
+	of workflows.
+
+	Initially we have a large number of input files which contain
+	some piece of data
+
+
+
+
+
+*/
