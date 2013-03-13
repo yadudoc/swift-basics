@@ -1,0 +1,121 @@
+2013-03-07 16:45:31,370+0530 DEBUG Loader arguments: [x_treefold.swift]
+2013-03-07 16:45:31,370+0530 DEBUG Loader Max heap: 954466304
+2013-03-07 16:45:31,371+0530 DEBUG textfiles BEGIN SWIFTSCRIPT:
+int limit   = 5;
+int array[] = [1:limit:1];
+
+
+(int sum) add (int array[], int start, int end){
+    if ( start == end ){
+       tracef("Start == end for %i \n", start);
+       sum = array[start];
+    }else{
+       int mid = (start+end)%/2;
+       tracef("Start, Mid : (%i, %i)  Mid+1, End : (%i, %i) \n", start, mid, mid+1, end);
+       int a,b;
+       //sum = add(array, start, mid) + add(array, mid+1, end);
+       a = add(array, start, mid);
+       b = add(array, mid+1, end);
+       sum = a + b;
+    }
+}
+
+(int sum) _add (int array[], int start, int end){
+
+     int mid = (start+end)%/2;
+     tracef("Start, Mid : (%i, %i)  Mid+1, End : (%i, %i) \n", start, mid, mid+1, end);
+     int a,b;
+     if ( start == mid ){
+     	a = array[start];
+     }else{
+        a = _add(array, start, mid);
+     }
+     b = 0;
+      /*
+     int t = mid+1;
+     if ( t == end ){
+     	b = array[end];
+     else{
+        b = _add(array, t, end);
+     }
+     */
+     sum = a + b;
+}
+
+//tracef("add(range) = %i \n", add(array, 0, limit-1));
+tracef("_add(range) = %i \n", _add(array, 0, limit-1));
+
+
+2013-03-07 16:45:31,371+0530 DEBUG textfiles END SWIFTSCRIPT:
+2013-03-07 16:45:31,372+0530 INFO  Loader x_treefold.swift: source file is new. Recompiling.
+2013-03-07 16:45:32,064+0530 INFO  Warnings Warning: Parameter array, on line 5, shadows variable of same name on line 2
+2013-03-07 16:45:32,098+0530 INFO  Warnings Warning: Parameter array, on line 20, shadows variable of same name on line 2
+2013-03-07 16:45:32,111+0530 INFO  Warnings Warning: Procedure _add is deprecated, at 43
+2013-03-07 16:45:32,233+0530 DEBUG Loader Swift configuration ([]): {pgraph.node.options=color="seagreen", style="filled", clustering.min.time=60, clustering.queue.delay=4, sites.file=/home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/../etc/sites.xml, ticker.prefix=Progress:  time:, provenance.log=false, kickstart.enabled=maybe, tc.file=/home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/../etc/tc.data, foreach.max.threads=16384, lazy.errors=false, ticker.date.format=, sitedir.keep=false, throttle.score.job.factor=0.2, kickstart.always.transfer=false, throttle.host.submit=2, replication.limit=3, clustering.enabled=false, pgraph=false, file.gc.enabled=true, replication.min.queue.time=60, wrapper.parameter.mode=args, replication.enabled=false, throttle.transfers=4, wrapperlog.always.transfer=false, throttle.submit=4, pgraph.graph.options=splines="compound", rankdir="TB", caching.algorithm=LRU, logfile=x_treefold-20130307-1645-ykloo4te.log, use.wrapper.staging=false, tracing.enabled=true, provider.staging.pin.swiftfiles=false, wrapper.invocation.mode=absolute, execution.retries=0, cdm.broadcast.mode=file, status.mode=files, use.provider.staging=false, throttle.file.operations=8}
+2013-03-07 16:45:32,233+0530 DEBUG textfiles using default sites file
+2013-03-07 16:45:32,239+0530 DEBUG VDL2ExecutionContext Stack dump:
+Level 1
+[iA = 0, iB = 0, bA = false, bB = false]
+	vdl:instanceconfig = Swift configuration ([]): {pgraph.node.options=color="seagreen", style="filled", clustering.min.time=60, clustering.queue.delay=4, sites.file=/home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/../etc/sites.xml, ticker.prefix=Progress:  time:, provenance.log=false, kickstart.enabled=maybe, tc.file=/home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/../etc/tc.data, foreach.max.threads=16384, lazy.errors=false, ticker.date.format=, sitedir.keep=false, throttle.score.job.factor=0.2, kickstart.always.transfer=false, throttle.host.submit=2, replication.limit=3, clustering.enabled=false, pgraph=false, file.gc.enabled=true, replication.min.queue.time=60, wrapper.parameter.mode=args, replication.enabled=false, throttle.transfers=4, wrapperlog.always.transfer=false, throttle.submit=4, pgraph.graph.options=splines="compound", rankdir="TB", caching.algorithm=LRU, logfile=x_treefold-20130307-1645-ykloo4te.log, use.wrapper.staging=false, tracing.enabled=true, provider.staging.pin.swiftfiles=false, wrapper.invocation.mode=absolute, execution.retries=0, cdm.broadcast.mode=file, status.mode=files, use.provider.staging=false, throttle.file.operations=8}
+	vdl:operation = run
+	swift.home = /home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/..
+	PATH_SEPARATOR = /
+
+
+2013-03-07 16:45:32,241+0530 INFO  VDL2ExecutionContext swift.home = /home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/..
+2013-03-07 16:45:32,761+0530 INFO  swift Using sites file: /home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/../etc/sites.xml
+2013-03-07 16:45:32,798+0530 INFO  swift Using tc.data: /home/yadu/swift-0.94/cog/modules/swift/dist/swift-svn/bin/../etc/tc.data
+2013-03-07 16:45:32,881+0530 INFO  AbstractScheduler Setting resources to: {localhost=localhost}
+2013-03-07 16:45:33,301+0530 INFO  swift Swift 0.94RC3 swift-r6268 cog-r3605
+
+2013-03-07 16:45:33,301+0530 INFO  swift RUNID id=run:20130307-1645-ykloo4te
+2013-03-07 16:45:33,321+0530 INFO  TRACE VARIABLE, line 1, thread main, limit INITIALIZED 
+2013-03-07 16:45:33,321+0530 INFO  TRACE DECLARE, line 1, thread main, limit 
+2013-03-07 16:45:33,322+0530 INFO  TRACE DECLARE, line 2, thread main, array
+2013-03-07 16:45:33,322+0530 INFO  TRACE VARIABLE, line 2, thread main, array INITIALIZED 
+2013-03-07 16:45:33,334+0530 INFO  RuntimeStats$ProgressTicker 
+2013-03-07 16:45:33,335+0530 DEBUG swift INTERNALPROC_START thread=0-2 name=tracef
+2013-03-07 16:45:33,340+0530 INFO  TRACE ASSIGN, line 2, thread 0-0, limit = 5
+2013-03-07 16:45:33,342+0530 INFO  TRACE VARIABLE, line 1, thread main, limit INITIALIZED 
+2013-03-07 16:45:33,343+0530 INFO  TRACE ASSIGN, line 5, thread 0-1, array = ?
+2013-03-07 16:45:33,352+0530 INFO  TRACE CALL, line 20, thread 0-2-1, _add(array = array, start = 0, end = 4)
+2013-03-07 16:45:33,352+0530 INFO  swift STARTCOMPOUND thread=0-2-1 name=__add
+2013-03-07 16:45:33,352+0530 INFO  TRACE VARIABLE, line 22, thread 2-1, mid INITIALIZED 
+2013-03-07 16:45:33,352+0530 INFO  TRACE DECLARE, line 22, thread 2-1, mid 
+2013-03-07 16:45:33,353+0530 INFO  TRACE VARIABLE, line 24, thread 2-1, a INITIALIZED 
+2013-03-07 16:45:33,353+0530 INFO  TRACE DECLARE, line 24, thread 2-1, a 
+2013-03-07 16:45:33,353+0530 INFO  TRACE VARIABLE, line 24, thread 2-1, b INITIALIZED 
+2013-03-07 16:45:33,353+0530 INFO  TRACE DECLARE, line 24, thread 2-1, b 
+2013-03-07 16:45:33,353+0530 DEBUG swift INTERNALPROC_START thread=0-2-1-1 name=tracef
+2013-03-07 16:45:33,354+0530 INFO  TRACE ASSIGN, line 39, thread 0-2-1-3, b = 0
+2013-03-07 16:45:33,354+0530 INFO  TRACE VARIABLE, line 24, thread 2-1, b INITIALIZED 
+2013-03-07 16:45:33,354+0530 INFO  TRACE ASSIGN, line 23, thread 0-2-1-0, mid = 2
+2013-03-07 16:45:33,354+0530 INFO  TRACE VARIABLE, line 22, thread 2-1, mid INITIALIZED 
+2013-03-07 16:45:33,355+0530 INFO  Tracef Start, Mid : (0, 2)  Mid+1, End : (3, 4) 
+
+2013-03-07 16:45:33,355+0530 DEBUG swift SCOPE thread=0-2-1-2
+2013-03-07 16:45:33,355+0530 DEBUG swift INTERNALPROC_END thread=0-2-1-1 name=tracef
+2013-03-07 16:45:33,355+0530 INFO  AbstractDataNode All partial closes for a:int - Open have happened. Closing fully.
+2013-03-07 16:45:33,356+0530 DEBUG VDL2ExecutionContext Karajan level error: Internal type error. Expected a Integer. Got null
+2013-03-07 16:45:33,356+0530 INFO  TRACE CALL, line 20, thread 0-2-1-2-1, _add(array = array, start = 0, end = 2)
+2013-03-07 16:45:33,356+0530 INFO  swift STARTCOMPOUND thread=0-2-1-2-1 name=__add
+2013-03-07 16:45:33,364+0530 INFO  ExecutionContext Detailed exception: 
+Internal type error. Expected a Integer. Got null
+
+	at org.griphyn.vdl.karajan.lib.SwiftArg.checkInt(SwiftArg.java:99)
+	at org.griphyn.vdl.karajan.lib.Operators.vdlop_sum(Operators.java:129)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.globus.cog.karajan.workflow.nodes.functions.FunctionsCollection.function(FunctionsCollection.java:82)
+	at org.globus.cog.karajan.workflow.nodes.functions.AbstractFunction.post(AbstractFunction.java:27)
+	at org.globus.cog.karajan.workflow.nodes.AbstractSequentialWithArguments.futureModified(AbstractSequentialWithArguments.java:208)
+	at org.griphyn.vdl.karajan.DSHandleFutureWrapper$1.run(DSHandleFutureWrapper.java:85)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:722)
+2013-03-07 16:45:33,366+0530 INFO  Loader Swift finished with errors

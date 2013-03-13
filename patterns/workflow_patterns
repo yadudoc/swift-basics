@@ -1,0 +1,63 @@
+<Thought dumps>
+
+In the technical report on auto generation of workflows, certain component
+elements are not necessarily relevant to the swift-model, while some are
+(possibly) missing.
+
+Let us consider just data and a group of data, a dataset.
+Here, consider the siso model. One program instance takes a data item and
+outputs a processed one. This one instance model is not relevant here
+directly.
+
+Instead what matters is the result of wrapping a siso style program inside
+a looping construct, iterate (sequential) or foreach (parallel). This is
+usually how parallelism is expressed for these types of siso style functions.
+
+siso(X) -> Y  becomes:
+foreach x,i in X{
+	Y[i] = siso(x);
+}
+which is effectively the same as saying Y[] = siso(X[]).
+-There is a one to one mapping here, that is what makes is siso.
+
+I think there is also a class of functions missing, which is functions
+which have either no input or no output or either, say:
+delay(5);
+delay();
+monitor();
+
+These wrappers, foreach and iterate in different combinations and compositions
+could make very complex DAGS.
+
+Miso's are also very interesting. They allow us to compress a large dataset
+to a single item/file. These are generally rules on how to add/combine/fold
+multiple data items to one.
+
+
+Mimo's <- think about these, there are variants of these which could
+be quite complex.
+
+
+</Thought dumps>
+
+// Single input single output.
+// These are the functions which usually are the mappers, usually
+// functions in the mathematical sense.
+// - f(x) -> y
+Code : siso_square(), siso_fact()
+
+// Single input multiple output
+// One data input to a single instance or multiple instances of the program
+// yields multiple data outputs.
+
+This could be a function taking one input and returning an array?
+
+
+
+// Multiple input single output
+// Multiple input sets to a function yield one output. This is similar
+// to the fold functions.
+
+// Multiple input multiple output
+// Several variants of this are possible.
+// evaluate what could be more interesting to out needs here.

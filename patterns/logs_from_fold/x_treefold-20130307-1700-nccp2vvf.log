@@ -1,0 +1,893 @@
+2013-03-07 17:00:47,866+0530 DEBUG Loader arguments: [x_treefold.swift]
+2013-03-07 17:00:47,866+0530 DEBUG Loader Max heap: 238616576
+2013-03-07 17:00:47,868+0530 DEBUG textfiles BEGIN SWIFTSCRIPT:
+int limit   = 5;
+int array[] = [1:limit:1];
+
+
+(int sum) add (int array[], int start, int end){
+    if ( start == end ){
+       tracef("Start == end for %i \n", start);
+       sum = array[start];
+    }else{
+       int mid = (start+end)%/2;
+       tracef("Start, Mid : (%i, %i)  Mid+1, End : (%i, %i) \n", start, mid, mid+1, end);
+       int a,b;
+       //sum = add(array, start, mid) + add(array, mid+1, end);
+       a = add(array, start, mid);
+       b = add(array, mid+1, end);
+       sum = a + b;
+    }
+}
+
+/*
+	0.94 Fails during execution  type error.
+	0.93 Runs
+	faster - Not tested here, had issues with recursive code.
+*/
+(int sum) _add (int array[], int start, int end){
+     int mid = (start+end)%/2;
+     tracef("Start, Mid : (%i, %i)  Mid+1, End : (%i, %i) \n", start, mid, mid+1, end);
+     int a,b;
+     if ( start == mid ){
+     	tracef("Equal start == mid \n");
+     	a = array[start];
+     }else{
+     	tracef("Equal start != mid  %i : %i \n", start, mid);
+        a = _add(array, start, mid);
+     }
+     int t = mid+1;
+     if ( t == end ){
+     	tracef("Equal mid+1 == end \n");
+     	b = array[end];
+     }else{
+     	tracef("Equal start != mid  %i : %i \n", t, end);
+        b = _add(array, t, end);
+     }
+     sum = a + b;
+}
+
+//tracef("add(range) = %i \n", add(array, 0, limit-1));
+tracef("_add(range) = %i \n", _add(array, 0, limit-1));
+
+
+2013-03-07 17:00:47,868+0530 DEBUG textfiles END SWIFTSCRIPT:
+2013-03-07 17:00:47,868+0530 INFO  Loader x_treefold.swift: source file is new. Recompiling.
+2013-03-07 17:00:47,868+0530 DEBUG Loader kmlversion is >a433b3f1-20e6-4b3e-bb5c-6fa84850c9d9<
+2013-03-07 17:00:47,868+0530 DEBUG Loader build version is >a433b3f1-20e6-4b3e-bb5c-6fa84850c9d9<
+2013-03-07 17:00:48,484+0530 INFO  Karajan Validation of XML intermediate file was successful
+2013-03-07 17:00:48,528+0530 WARN  VariableScope Variable array defined in scope 10488904 shadows variable of same name in scope 22634864
+2013-03-07 17:00:48,562+0530 WARN  VariableScope Variable array defined in scope 997998 shadows variable of same name in scope 22634864
+2013-03-07 17:00:48,746+0530 DEBUG textfiles using default sites file
+2013-03-07 17:00:48,751+0530 INFO  VDL2ExecutionContext Stack dump:
+Level 1
+[iA = 0, iB = 0, bA = false, bB = false]
+	vdl:instanceconfig = Swift configuration []
+	vdl:operation = run
+	swift.home = /home/yadu/swift-0.93/cog/modules/swift/dist/swift-svn/bin/..
+	PATH_SEPARATOR = /
+
+
+2013-03-07 17:00:49,236+0530 INFO  unknown Using sites file: /home/yadu/swift-0.93/cog/modules/swift/dist/swift-svn/bin/../etc/sites.xml
+2013-03-07 17:00:49,266+0530 INFO  unknown Using tc.data: /home/yadu/swift-0.93/cog/modules/swift/dist/swift-svn/bin/../etc/tc.data
+2013-03-07 17:00:49,348+0530 INFO  AbstractScheduler Setting resources to: {localhost=localhost}
+2013-03-07 17:00:49,739+0530 INFO  unknown Swift 0.93 swift-r6322 cog-r3602
+
+2013-03-07 17:00:49,739+0530 INFO  unknown RUNID id=run:20130307-1700-nccp2vvf
+2013-03-07 17:00:49,805+0530 DEBUG vdl:mains INTERNALPROC_START thread=0-2 name=tracef
+2013-03-07 17:00:49,807+0530 INFO  SetFieldValue Set: limit=5.0
+2013-03-07 17:00:49,810+0530 INFO  SetFieldValue Set: array={}
+2013-03-07 17:00:49,812+0530 INFO  _add STARTCOMPOUND thread=0-2-1 name=_add
+2013-03-07 17:00:49,816+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-1 name=tracef
+2013-03-07 17:00:49,818+0530 INFO  SetFieldValue Set: mid=2.0
+2013-03-07 17:00:49,820+0530 DEBUG _add SCOPE thread=0-2-1-2
+2013-03-07 17:00:49,820+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-0 name=tracef
+2013-03-07 17:00:49,820+0530 INFO  Tracef Start, Mid : (0, 2)  Mid+1, End : (3, 4) 
+
+2013-03-07 17:00:49,821+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-1
+2013-03-07 17:00:49,821+0530 INFO  SetFieldValue Set: t=3.0
+2013-03-07 17:00:49,823+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1 name=_add
+2013-03-07 17:00:49,823+0530 INFO  Tracef Equal start != mid  0 : 2 
+
+2013-03-07 17:00:49,823+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-0
+2013-03-07 17:00:49,824+0530 DEBUG _add SCOPE thread=0-2-1-4
+2013-03-07 17:00:49,824+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-0 name=tracef
+2013-03-07 17:00:49,826+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,827+0530 INFO  SetFieldValue Set: mid=1.0
+2013-03-07 17:00:49,828+0530 INFO  SetFieldValue Set: t=2.0
+2013-03-07 17:00:49,828+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2
+2013-03-07 17:00:49,829+0530 DEBUG _add SCOPE thread=0-2-1-2-1-4
+2013-03-07 17:00:49,829+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,829+0530 INFO  Tracef Equal start != mid  3 : 4 
+
+2013-03-07 17:00:49,829+0530 INFO  Tracef Start, Mid : (0, 1)  Mid+1, End : (2, 2) 
+
+2013-03-07 17:00:49,828+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1 name=_add
+2013-03-07 17:00:49,830+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,830+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-0
+2013-03-07 17:00:49,831+0530 INFO  SetFieldValue Set: b=3.0
+2013-03-07 17:00:49,832+0530 INFO  Tracef Equal start != mid  0 : 1 
+
+2013-03-07 17:00:49,832+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-1
+2013-03-07 17:00:49,832+0530 INFO  Tracef Equal mid+1 == end 
+
+2013-03-07 17:00:49,832+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-4-0
+2013-03-07 17:00:49,833+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,833+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,834+0530 INFO  SetFieldValue Set: mid=3.5
+2013-03-07 17:00:49,834+0530 INFO  SetFieldValue Set: t=4.5
+2013-03-07 17:00:49,834+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4
+2013-03-07 17:00:49,834+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-0
+2013-03-07 17:00:49,834+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,836+0530 INFO  Tracef Equal start != mid  4 : 4 
+
+2013-03-07 17:00:49,835+0530 INFO  Tracef Start, Mid : (3, 3)  Mid+1, End : (4, 4) 
+
+2013-03-07 17:00:49,836+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-0
+2013-03-07 17:00:49,836+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-1
+2013-03-07 17:00:49,836+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,836+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2
+2013-03-07 17:00:49,837+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,837+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,839+0530 INFO  Tracef Equal start != mid  3 : 3 
+
+2013-03-07 17:00:49,839+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-0
+2013-03-07 17:00:49,839+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,840+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,841+0530 INFO  SetFieldValue Set: mid=4.25
+2013-03-07 17:00:49,842+0530 INFO  SetFieldValue Set: t=5.25
+2013-03-07 17:00:49,842+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2
+2013-03-07 17:00:49,842+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4
+2013-03-07 17:00:49,843+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,843+0530 INFO  Tracef Start, Mid : (4, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,843+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,843+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-1
+2013-03-07 17:00:49,845+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,846+0530 INFO  Tracef Equal start != mid  4 : 4 
+
+2013-03-07 17:00:49,846+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-0
+2013-03-07 17:00:49,847+0530 INFO  SetFieldValue Set: mid=0.5
+2013-03-07 17:00:49,847+0530 INFO  SetFieldValue Set: mid=3.25
+2013-03-07 17:00:49,847+0530 INFO  SetFieldValue Set: t=1.5
+2013-03-07 17:00:49,847+0530 INFO  SetFieldValue Set: t=4.25
+2013-03-07 17:00:49,848+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2
+2013-03-07 17:00:49,848+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2
+2013-03-07 17:00:49,848+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4
+2013-03-07 17:00:49,849+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-4
+2013-03-07 17:00:49,849+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,849+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,849+0530 INFO  Tracef Start, Mid : (0, 0)  Mid+1, End : (1, 1) 
+
+2013-03-07 17:00:49,850+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,850+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,850+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-1
+2013-03-07 17:00:49,850+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,850+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-0
+2013-03-07 17:00:49,851+0530 INFO  Tracef Start, Mid : (3, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:49,851+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-1
+2013-03-07 17:00:49,852+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,853+0530 INFO  Tracef Equal start != mid  4 : 3 
+
+2013-03-07 17:00:49,853+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-0
+2013-03-07 17:00:49,853+0530 INFO  Tracef Equal start != mid  1 : 1 
+
+2013-03-07 17:00:49,853+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-0
+2013-03-07 17:00:49,853+0530 INFO  Tracef Equal start != mid  0 : 0 
+
+2013-03-07 17:00:49,853+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-0
+2013-03-07 17:00:49,854+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,854+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,855+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,856+0530 INFO  SetFieldValue Set: mid=4.375
+2013-03-07 17:00:49,856+0530 INFO  SetFieldValue Set: t=5.375
+2013-03-07 17:00:49,856+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2
+2013-03-07 17:00:49,857+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4
+2013-03-07 17:00:49,857+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,857+0530 INFO  Tracef Start, Mid : (4, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,857+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-1
+2013-03-07 17:00:49,858+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,858+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,858+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,859+0530 INFO  SetFieldValue Set: mid=1.25
+2013-03-07 17:00:49,859+0530 INFO  SetFieldValue Set: t=2.25
+2013-03-07 17:00:49,859+0530 INFO  SetFieldValue Set: mid=0.25
+2013-03-07 17:00:49,860+0530 INFO  Tracef Equal start != mid  4 : 4 
+
+2013-03-07 17:00:49,861+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-2
+2013-03-07 17:00:49,861+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,857+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,860+0530 INFO  SetFieldValue Set: t=1.25
+2013-03-07 17:00:49,861+0530 INFO  Tracef Equal start != mid  3 : 3 
+
+2013-03-07 17:00:49,862+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-0
+2013-03-07 17:00:49,862+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-0
+2013-03-07 17:00:49,862+0530 INFO  Tracef Start, Mid : (1, 1)  Mid+1, End : (2, 1) 
+
+2013-03-07 17:00:49,863+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-4
+2013-03-07 17:00:49,863+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-4
+2013-03-07 17:00:49,863+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-1
+2013-03-07 17:00:49,863+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,864+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,864+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,864+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,866+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,861+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-2
+2013-03-07 17:00:49,867+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,867+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,869+0530 INFO  SetFieldValue Set: mid=4.625
+2013-03-07 17:00:49,869+0530 INFO  SetFieldValue Set: t=5.625
+2013-03-07 17:00:49,870+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,871+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,871+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-2
+2013-03-07 17:00:49,871+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-4
+2013-03-07 17:00:49,871+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,872+0530 INFO  Tracef Start, Mid : (0, 0)  Mid+1, End : (1, 0) 
+
+2013-03-07 17:00:49,872+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,872+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-1
+2013-03-07 17:00:49,866+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,873+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,873+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,873+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-0
+2013-03-07 17:00:49,873+0530 INFO  Tracef Start, Mid : (5, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,874+0530 INFO  SetFieldValue Set: mid=3.125
+2013-03-07 17:00:49,875+0530 INFO  SetFieldValue Set: t=4.125
+2013-03-07 17:00:49,876+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-2
+2013-03-07 17:00:49,876+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,876+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,877+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-4
+2013-03-07 17:00:49,877+0530 INFO  Tracef Equal start != mid  1 : 0 
+
+2013-03-07 17:00:49,877+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,877+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-1
+2013-03-07 17:00:49,877+0530 INFO  Tracef Equal start != mid  0 : 0 
+
+2013-03-07 17:00:49,877+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-0
+2013-03-07 17:00:49,878+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,878+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-0
+2013-03-07 17:00:49,878+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,878+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,878+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-0
+2013-03-07 17:00:49,878+0530 INFO  Tracef Equal start != mid  1 : 1 
+
+2013-03-07 17:00:49,879+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,879+0530 INFO  SetFieldValue Set: mid=4.4375
+2013-03-07 17:00:49,879+0530 INFO  SetFieldValue Set: mid=4.8125
+2013-03-07 17:00:49,880+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,880+0530 INFO  SetFieldValue Set: t=5.4375
+2013-03-07 17:00:49,880+0530 INFO  SetFieldValue Set: t=5.8125
+2013-03-07 17:00:49,880+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-0
+2013-03-07 17:00:49,881+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-2
+2013-03-07 17:00:49,881+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-2
+2013-03-07 17:00:49,881+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-4
+2013-03-07 17:00:49,881+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-4
+2013-03-07 17:00:49,882+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,882+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,882+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,883+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,883+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-0
+2013-03-07 17:00:49,880+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-0
+2013-03-07 17:00:49,882+0530 INFO  Tracef Start, Mid : (5, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,884+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,884+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,884+0530 INFO  Tracef Equal start != mid  4 : 3 
+
+2013-03-07 17:00:49,884+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-1
+2013-03-07 17:00:49,886+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,887+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,887+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,888+0530 INFO  Tracef Equal start != mid  3 : 3 
+
+2013-03-07 17:00:49,889+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-4-0
+2013-03-07 17:00:49,890+0530 INFO  SetFieldValue Set: mid=1.625
+2013-03-07 17:00:49,890+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,890+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-2-0
+2013-03-07 17:00:49,890+0530 INFO  SetFieldValue Set: t=2.625
+2013-03-07 17:00:49,890+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,891+0530 INFO  SetFieldValue Set: mid=0.875
+2013-03-07 17:00:49,891+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,892+0530 INFO  SetFieldValue Set: t=1.875
+2013-03-07 17:00:49,892+0530 INFO  Tracef Start, Mid : (4, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,893+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-4-1-2
+2013-03-07 17:00:49,893+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-2-0
+2013-03-07 17:00:49,893+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-4-1-4
+2013-03-07 17:00:49,894+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-4-1-2
+2013-03-07 17:00:49,894+0530 INFO  Tracef Equal start != mid  4 : 4 
+
+2013-03-07 17:00:49,895+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-4-1-4
+2013-03-07 17:00:49,895+0530 INFO  Tracef Start, Mid : (3, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:49,896+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-2-0
+2013-03-07 17:00:49,897+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-1
+2013-03-07 17:00:49,897+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-1
+2013-03-07 17:00:49,898+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,898+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,899+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,899+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,899+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,899+0530 INFO  Tracef Start, Mid : (1, 0)  Mid+1, End : (1, 0) 
+
+2013-03-07 17:00:49,899+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,900+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-4-0
+2013-03-07 17:00:49,900+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-1
+2013-03-07 17:00:49,901+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,901+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,901+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,902+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,902+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,903+0530 INFO  SetFieldValue Set: mid=3.875
+2013-03-07 17:00:49,904+0530 INFO  SetFieldValue Set: t=4.875
+2013-03-07 17:00:49,906+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-4-1-2
+2013-03-07 17:00:49,907+0530 INFO  SetFieldValue Set: mid=0.125
+2013-03-07 17:00:49,907+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-4-1-4
+2013-03-07 17:00:49,908+0530 INFO  SetFieldValue Set: t=1.125
+2013-03-07 17:00:49,909+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,909+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,909+0530 INFO  Tracef Start, Mid : (2, 1)  Mid+1, End : (2, 1) 
+
+2013-03-07 17:00:49,910+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,910+0530 INFO  Tracef Equal start != mid  1 : 0 
+
+2013-03-07 17:00:49,911+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-2-1-2
+2013-03-07 17:00:49,911+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-2-0
+2013-03-07 17:00:49,911+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-1
+2013-03-07 17:00:49,911+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-4-0
+2013-03-07 17:00:49,911+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-2-1-4
+2013-03-07 17:00:49,912+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,912+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,912+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,913+0530 INFO  Tracef Start, Mid : (0, 0)  Mid+1, End : (1, 0) 
+
+2013-03-07 17:00:49,913+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,914+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,914+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-1
+2013-03-07 17:00:49,916+0530 INFO  SetFieldValue Set: mid=4.9375
+2013-03-07 17:00:49,916+0530 INFO  SetFieldValue Set: mid=4.8125
+2013-03-07 17:00:49,916+0530 INFO  SetFieldValue Set: t=5.9375
+2013-03-07 17:00:49,917+0530 INFO  SetFieldValue Set: t=5.8125
+2013-03-07 17:00:49,918+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,918+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,918+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,918+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-2-1-2
+2013-03-07 17:00:49,919+0530 INFO  Tracef Equal start != mid  4 : 3 
+
+2013-03-07 17:00:49,919+0530 INFO  SetFieldValue Set: mid=1.375
+2013-03-07 17:00:49,919+0530 INFO  Tracef Start, Mid : (4, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:49,919+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-4-1-2
+2013-03-07 17:00:49,919+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,920+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-2-1-4
+2013-03-07 17:00:49,920+0530 INFO  SetFieldValue Set: t=2.375
+2013-03-07 17:00:49,920+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,920+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-4-1-4
+2013-03-07 17:00:49,920+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,920+0530 INFO  Tracef Equal start != mid  4 : 3 
+
+2013-03-07 17:00:49,921+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-4-0
+2013-03-07 17:00:49,921+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-4-0
+2013-03-07 17:00:49,922+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,922+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,920+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-1
+2013-03-07 17:00:49,923+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,923+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,923+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-2-1-2
+2013-03-07 17:00:49,924+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,924+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-2-1-4
+2013-03-07 17:00:49,925+0530 INFO  Tracef Equal start != mid  1 : 0 
+
+2013-03-07 17:00:49,926+0530 INFO  Tracef Equal start != mid  1 : 0 
+
+2013-03-07 17:00:49,927+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,927+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-4-0
+2013-03-07 17:00:49,927+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-2-0
+2013-03-07 17:00:49,928+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-2-0
+2013-03-07 17:00:49,928+0530 INFO  Tracef Start, Mid : (1, 1)  Mid+1, End : (2, 1) 
+
+2013-03-07 17:00:49,929+0530 INFO  Tracef Equal start != mid  0 : 0 
+
+2013-03-07 17:00:49,929+0530 INFO  SetFieldValue Set: mid=3.6875
+2013-03-07 17:00:49,930+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,928+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,930+0530 INFO  SetFieldValue Set: t=4.6875
+2013-03-07 17:00:49,932+0530 INFO  SetFieldValue Set: mid=3.0625
+2013-03-07 17:00:49,933+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,933+0530 INFO  SetFieldValue Set: t=4.0625
+2013-03-07 17:00:49,934+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-1
+2013-03-07 17:00:49,935+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,935+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-4-0
+2013-03-07 17:00:49,934+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,935+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-2-0
+2013-03-07 17:00:49,935+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,936+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,936+0530 INFO  Tracef Start, Mid : (5, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,936+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-2-1-2
+2013-03-07 17:00:49,934+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,933+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-4-1-2
+2013-03-07 17:00:49,937+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-1
+2013-03-07 17:00:49,938+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-2-1-4
+2013-03-07 17:00:49,939+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,939+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,939+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,940+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,940+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,940+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,941+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,941+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-2-0
+2013-03-07 17:00:49,941+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-4-0
+2013-03-07 17:00:49,941+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-4-0
+2013-03-07 17:00:49,941+0530 INFO  SetFieldValue Set: mid=5.09375
+2013-03-07 17:00:49,937+0530 INFO  Tracef Start, Mid : (4, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:49,935+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-4-1-4
+2013-03-07 17:00:49,942+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,942+0530 INFO  Tracef Start, Mid : (5, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,942+0530 INFO  SetFieldValue Set: t=6.09375
+2013-03-07 17:00:49,942+0530 INFO  SetFieldValue Set: mid=4.46875
+2013-03-07 17:00:49,943+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-2-0
+2013-03-07 17:00:49,943+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,943+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-4-1-1
+2013-03-07 17:00:49,943+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-1
+2013-03-07 17:00:49,943+0530 INFO  SetFieldValue Set: mid=5.03125
+2013-03-07 17:00:49,943+0530 INFO  SetFieldValue Set: t=5.46875
+2013-03-07 17:00:49,944+0530 INFO  SetFieldValue Set: t=6.03125
+2013-03-07 17:00:49,944+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,944+0530 INFO  SetFieldValue Set: mid=4.90625
+2013-03-07 17:00:49,944+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2
+2013-03-07 17:00:49,945+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,945+0530 INFO  SetFieldValue Set: t=5.90625
+2013-03-07 17:00:49,945+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4
+2013-03-07 17:00:49,945+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2
+2013-03-07 17:00:49,946+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-4-0
+2013-03-07 17:00:49,946+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2
+2013-03-07 17:00:49,946+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4
+2013-03-07 17:00:49,946+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,947+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2
+2013-03-07 17:00:49,947+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,948+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,949+0530 INFO  Tracef Equal start != mid  1 : 1 
+
+2013-03-07 17:00:49,949+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4
+2013-03-07 17:00:49,949+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,949+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,950+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-2-0
+2013-03-07 17:00:49,950+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,951+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,951+0530 INFO  Tracef Start, Mid : (3, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:49,951+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,952+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,952+0530 INFO  Tracef Start, Mid : (4, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,951+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,953+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-2-1-1
+2013-03-07 17:00:49,953+0530 INFO  Tracef Equal start != mid  3 : 3 
+
+2013-03-07 17:00:49,952+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,955+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-4-1-4
+2013-03-07 17:00:49,957+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,958+0530 INFO  Tracef Equal start != mid  4 : 3 
+
+2013-03-07 17:00:49,958+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,958+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,958+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,959+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,959+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-2-1-4-0
+2013-03-07 17:00:49,960+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,960+0530 INFO  Tracef Equal start != mid  4 : 3 
+
+2013-03-07 17:00:49,961+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-4-1-4-0
+2013-03-07 17:00:49,964+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-2-1-2-0
+2013-03-07 17:00:49,965+0530 INFO  Tracef Equal start != mid  6 : 4 
+
+2013-03-07 17:00:49,958+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-2-1-1
+2013-03-07 17:00:49,958+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,965+0530 INFO  Tracef Equal start != mid  4 : 4 
+
+2013-03-07 17:00:49,965+0530 INFO  SetFieldValue Set: mid=1.8125
+2013-03-07 17:00:49,966+0530 INFO  SetFieldValue Set: mid=1.9375
+2013-03-07 17:00:49,966+0530 INFO  SetFieldValue Set: mid=1.0625
+2013-03-07 17:00:49,966+0530 INFO  Tracef Equal start != mid  5 : 5 
+
+2013-03-07 17:00:49,966+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-0
+2013-03-07 17:00:49,967+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,967+0530 INFO  SetFieldValue Set: t=2.8125
+2013-03-07 17:00:49,967+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-0
+2013-03-07 17:00:49,967+0530 INFO  SetFieldValue Set: t=2.9375
+2013-03-07 17:00:49,968+0530 INFO  SetFieldValue Set: mid=1.1875
+2013-03-07 17:00:49,968+0530 INFO  SetFieldValue Set: t=2.0625
+2013-03-07 17:00:49,969+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-0
+2013-03-07 17:00:49,968+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-0
+2013-03-07 17:00:49,970+0530 INFO  SetFieldValue Set: t=2.1875
+2013-03-07 17:00:49,971+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-4-1-4-1-2
+2013-03-07 17:00:49,971+0530 INFO  Tracef Equal start != mid  5 : 5 
+
+2013-03-07 17:00:49,971+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-4-1-2-1-2
+2013-03-07 17:00:49,973+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-4-1-4-1-4
+2013-03-07 17:00:49,973+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-0
+2013-03-07 17:00:49,971+0530 INFO  Tracef Start, Mid : (5, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:49,973+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,973+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,973+0530 INFO  Tracef Start, Mid : (5, 5)  Mid+1, End : (6, 4) 
+
+2013-03-07 17:00:49,973+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-4-1-4-1-2
+2013-03-07 17:00:49,973+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-4-1-2-1-4
+2013-03-07 17:00:49,973+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-4-1-2-1-4
+2013-03-07 17:00:49,972+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-4-1-2-1-2
+2013-03-07 17:00:49,972+0530 INFO  Tracef Equal start != mid  4 : 3 
+
+2013-03-07 17:00:49,974+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-4-1-1
+2013-03-07 17:00:49,974+0530 INFO  Tracef Start, Mid : (5, 5)  Mid+1, End : (6, 4) 
+
+2013-03-07 17:00:49,974+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-4-1-4-1-4
+2013-03-07 17:00:49,975+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,975+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-2-1-1
+2013-03-07 17:00:49,975+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-4-1-2-0
+2013-03-07 17:00:49,972+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,974+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-0
+2013-03-07 17:00:49,976+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-4-1-1
+2013-03-07 17:00:49,976+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,977+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,977+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,977+0530 INFO  Tracef Start, Mid : (2, 1)  Mid+1, End : (2, 1) 
+
+2013-03-07 17:00:49,977+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,977+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,978+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,978+0530 INFO  Tracef Equal start != mid  6 : 4 
+
+2013-03-07 17:00:49,978+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-4-1-1
+2013-03-07 17:00:49,978+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:49,979+0530 INFO  Tracef Start, Mid : (1, 1)  Mid+1, End : (2, 0) 
+
+2013-03-07 17:00:49,979+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,979+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-4-1-4-1-4-0
+2013-03-07 17:00:49,979+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,980+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-4-1-1
+2013-03-07 17:00:49,980+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,980+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,981+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,981+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,982+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,974+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:49,982+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:49,982+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,978+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,982+0530 INFO  Tracef Start, Mid : (2, 1)  Mid+1, End : (2, 1) 
+
+2013-03-07 17:00:49,982+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:49,984+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,984+0530 INFO  SetFieldValue Set: mid=4.1875
+2013-03-07 17:00:49,985+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:49,986+0530 INFO  SetFieldValue Set: mid=0.0625
+2013-03-07 17:00:49,987+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-2-1-1
+2013-03-07 17:00:49,987+0530 INFO  SetFieldValue Set: mid=4.0625
+2013-03-07 17:00:49,987+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-0
+2013-03-07 17:00:49,988+0530 INFO  SetFieldValue Set: t=1.0625
+2013-03-07 17:00:49,989+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,989+0530 INFO  Tracef Start, Mid : (1, 1)  Mid+1, End : (2, 0) 
+
+2013-03-07 17:00:49,990+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,991+0530 INFO  SetFieldValue Set: t=5.0625
+2013-03-07 17:00:49,991+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-2-1-1
+2013-03-07 17:00:49,991+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-2-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:49,991+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,991+0530 INFO  Tracef Equal start != mid  1 : 1 
+
+2013-03-07 17:00:49,991+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-4-1-2-0
+2013-03-07 17:00:49,991+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-2-1-2-1-2
+2013-03-07 17:00:49,991+0530 INFO  Tracef Equal start != mid  2 : 0 
+
+2013-03-07 17:00:49,992+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-2-1-2-0
+2013-03-07 17:00:49,992+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-4-1-4-0
+2013-03-07 17:00:49,992+0530 INFO  SetFieldValue Set: mid=0.6875
+2013-03-07 17:00:49,992+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-4-1-2-0
+2013-03-07 17:00:49,992+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:49,992+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-2-1-2-1-4
+2013-03-07 17:00:49,992+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-2-1-4-0
+2013-03-07 17:00:49,993+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:49,993+0530 INFO  SetFieldValue Set: t=1.6875
+2013-03-07 17:00:49,993+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-4-1-2-1-2
+2013-03-07 17:00:49,993+0530 INFO  Tracef Start, Mid : (4, 4)  Mid+1, End : (5, 3) 
+
+2013-03-07 17:00:49,993+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:49,994+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-4-1-4-1-2
+2013-03-07 17:00:49,994+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-4-1-2-1-4-0
+2013-03-07 17:00:49,994+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-4-1-1
+2013-03-07 17:00:49,994+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-4-1-2-1-4
+2013-03-07 17:00:49,994+0530 INFO  Tracef Equal start != mid  2 : 0 
+
+2013-03-07 17:00:49,994+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,995+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,995+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-2-1-4-1-2
+2013-03-07 17:00:49,995+0530 INFO  SetFieldValue Set: t=5.1875
+2013-03-07 17:00:49,994+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,996+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-4-1-4-0
+2013-03-07 17:00:49,997+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:49,998+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:49,998+0530 INFO  Tracef Equal start != mid  1 : 1 
+
+2013-03-07 17:00:49,998+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-2-1-2-1-4-1-4
+2013-03-07 17:00:49,998+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:49,999+0530 INFO  Tracef Start, Mid : (0, 0)  Mid+1, End : (1, 0) 
+
+2013-03-07 17:00:49,999+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:49,999+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:49,999+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-4-1-2-1-2-0
+2013-03-07 17:00:50,002+0530 INFO  SetFieldValue Set: mid=5.21875
+2013-03-07 17:00:50,002+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,003+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-4-1-4-1-4
+2013-03-07 17:00:50,001+0530 INFO  Tracef Start, Mid : (4, 4)  Mid+1, End : (5, 3) 
+
+2013-03-07 17:00:50,001+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-2-1-1
+2013-03-07 17:00:50,004+0530 INFO  Tracef Start, Mid : (1, 0)  Mid+1, End : (1, 0) 
+
+2013-03-07 17:00:50,004+0530 INFO  SetFieldValue Set: mid=4.90625
+2013-03-07 17:00:50,004+0530 INFO  SetFieldValue Set: t=6.21875
+2013-03-07 17:00:50,004+0530 INFO  SetFieldValue Set: mid=5.09375
+2013-03-07 17:00:50,005+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-2-1-1
+2013-03-07 17:00:50,006+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:50,006+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-4-1-1
+2013-03-07 17:00:50,006+0530 INFO  SetFieldValue Set: t=5.90625
+2013-03-07 17:00:50,006+0530 INFO  SetFieldValue Set: mid=5.28125
+2013-03-07 17:00:50,007+0530 INFO  SetFieldValue Set: t=6.09375
+2013-03-07 17:00:50,007+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:50,007+0530 INFO  SetFieldValue Set: t=6.28125
+2013-03-07 17:00:50,007+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-4-1-2-1-2
+2013-03-07 17:00:50,003+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-2-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,008+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:50,008+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:50,008+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:50,008+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-2-1-2-1-2
+2013-03-07 17:00:50,010+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,011+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-4-1-4-1-4
+2013-03-07 17:00:50,008+0530 INFO  SetFieldValue Set: mid=1.8125
+2013-03-07 17:00:50,011+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-2-1-2-1-4
+2013-03-07 17:00:50,011+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,012+0530 INFO  SetFieldValue Set: t=2.8125
+2013-03-07 17:00:50,012+0530 INFO  Tracef Start, Mid : (5, 5)  Mid+1, End : (6, 4) 
+
+2013-03-07 17:00:50,008+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-4-1-2-1-4
+2013-03-07 17:00:50,008+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-4-1-4-1-2
+2013-03-07 17:00:50,013+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:50,014+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,014+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-2-1-1
+2013-03-07 17:00:50,014+0530 INFO  SetFieldValue Set: mid=1.4375
+2013-03-07 17:00:50,014+0530 INFO  Tracef Start, Mid : (5, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:50,008+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:50,015+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,008+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:50,015+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,015+0530 INFO  Tracef Equal start != mid  1 : 0 
+
+2013-03-07 17:00:50,015+0530 INFO  SetFieldValue Set: t=2.4375
+2013-03-07 17:00:50,016+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-4-1-1
+2013-03-07 17:00:50,016+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-2-1-4-1-2
+2013-03-07 17:00:50,016+0530 INFO  Tracef Equal start != mid  0 : 0 
+
+2013-03-07 17:00:50,016+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-2-1-4-0
+2013-03-07 17:00:50,016+0530 INFO  Tracef Equal start != mid  4 : 4 
+
+2013-03-07 17:00:50,014+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:50,012+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-2-1-4-1-4
+2013-03-07 17:00:50,017+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,018+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:50,019+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-2-1-4-1-4
+2013-03-07 17:00:50,019+0530 INFO  Tracef Equal start != mid  5 : 3 
+
+2013-03-07 17:00:50,019+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-2-1-2-0
+2013-03-07 17:00:50,020+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:50,011+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-4-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:50,011+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-4-1-2-1-4-1-2
+2013-03-07 17:00:50,020+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-2-1-4-0
+2013-03-07 17:00:50,020+0530 INFO  Tracef Start, Mid : (5, 5)  Mid+1, End : (6, 4) 
+
+2013-03-07 17:00:50,020+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-2-1-2-1-2
+2013-03-07 17:00:50,019+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-2-1-2-0
+2013-03-07 17:00:50,022+0530 INFO  Tracef Equal start != mid  1 : 0 
+
+2013-03-07 17:00:50,016+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,021+0530 DEBUG _add SCOPE thread=0-2-1-2-1-2-1-4-1-2-1-2-1-4
+2013-03-07 17:00:50,021+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,022+0530 INFO  Tracef Start, Mid : (2, 1)  Mid+1, End : (2, 1) 
+
+2013-03-07 17:00:50,021+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,022+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,023+0530 INFO  Tracef Equal start != mid  4 : 4 
+
+2013-03-07 17:00:50,023+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-4-1-1
+2013-03-07 17:00:50,023+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-4-1-1
+2013-03-07 17:00:50,024+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-4-1-2-0
+2013-03-07 17:00:50,024+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-4-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,024+0530 INFO  SetFieldValue Set: mid=3.90625
+2013-03-07 17:00:50,024+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-4-1-2-0
+2013-03-07 17:00:50,025+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:50,025+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,025+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-2-1-2-1-4-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,026+0530 INFO  SetFieldValue Set: t=4.90625
+2013-03-07 17:00:50,026+0530 INFO  Tracef Equal start != mid  1 : 0 
+
+2013-03-07 17:00:50,027+0530 INFO  SetFieldValue Set: mid=3.03125
+2013-03-07 17:00:50,027+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:50,028+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:50,028+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-2-1-2-1-4-1-4-0
+2013-03-07 17:00:50,028+0530 INFO  Tracef Start, Mid : (1, 1)  Mid+1, End : (2, 1) 
+
+2013-03-07 17:00:50,029+0530 INFO  SetFieldValue Set: t=4.03125
+2013-03-07 17:00:50,029+0530 INFO  Tracef Equal start != mid  5 : 3 
+
+2013-03-07 17:00:50,029+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-4-1-1 name=tracef
+2013-03-07 17:00:50,029+0530 INFO  SetFieldValue Set: mid=3.96875
+2013-03-07 17:00:50,030+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-2-1-1
+2013-03-07 17:00:50,030+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-1-1 name=tracef
+2013-03-07 17:00:50,026+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:50,030+0530 INFO  Tracef Start, Mid : (5, 5)  Mid+1, End : (6, 4) 
+
+2013-03-07 17:00:50,030+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-4-1-4-1-4-0
+2013-03-07 17:00:50,030+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-4-1-2-1-2
+2013-03-07 17:00:50,031+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-4-1-2-1-4
+2013-03-07 17:00:50,031+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:50,031+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-1-1 name=tracef
+2013-03-07 17:00:50,032+0530 INFO  SetFieldValue Set: t=4.96875
+2013-03-07 17:00:50,032+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-2-1-1
+2013-03-07 17:00:50,032+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:50,032+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-2-1-2-1-2
+2013-03-07 17:00:50,031+0530 INFO  Tracef Equal start != mid  5 : 5 
+
+2013-03-07 17:00:50,033+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:50,033+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:50,034+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-2-1-2-1-4
+2013-03-07 17:00:50,034+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-2-1-2-0
+2013-03-07 17:00:50,035+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-4-1-4-1-2-1 name=_add
+2013-03-07 17:00:50,035+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,035+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:50,035+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,035+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-4-1-4-0
+2013-03-07 17:00:50,036+0530 INFO  SetFieldValue Set: mid=5.421875
+2013-03-07 17:00:50,036+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-4-1-2-1-4-1 name=_add
+2013-03-07 17:00:50,036+0530 INFO  Tracef Equal start != mid  5 : 4 
+
+2013-03-07 17:00:50,037+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,037+0530 INFO  SetFieldValue Set: mid=4.953125
+2013-03-07 17:00:50,037+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-4-1-4-1-2
+2013-03-07 17:00:50,037+0530 INFO  SetFieldValue Set: mid=4.484375
+2013-03-07 17:00:50,037+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-4-1-4-1-4
+2013-03-07 17:00:50,037+0530 INFO  SetFieldValue Set: mid=5.453125
+2013-03-07 17:00:50,037+0530 INFO  Tracef Equal start != mid  6 : 4 
+
+2013-03-07 17:00:50,037+0530 INFO  Tracef Start, Mid : (4, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:50,038+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-4-1-2-0
+2013-03-07 17:00:50,038+0530 INFO  Tracef Start, Mid : (3, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:50,039+0530 INFO  SetFieldValue Set: t=5.953125
+2013-03-07 17:00:50,039+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,039+0530 INFO  SetFieldValue Set: t=5.484375
+2013-03-07 17:00:50,040+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-1-4-1-1 name=tracef
+2013-03-07 17:00:50,040+0530 INFO  SetFieldValue Set: t=6.453125
+2013-03-07 17:00:50,040+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-2-1-4-0
+2013-03-07 17:00:50,040+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-4-1-2-1-1
+2013-03-07 17:00:50,040+0530 INFO  SetFieldValue Set: mid=3.59375
+2013-03-07 17:00:50,041+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-2-1-2-1-1
+2013-03-07 17:00:50,041+0530 INFO  Tracef Equal start != mid  5 : 5 
+
+2013-03-07 17:00:50,042+0530 INFO  SetFieldValue Set: mid=5.234375
+2013-03-07 17:00:50,042+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-2-1-4-1-2-1 name=_add
+2013-03-07 17:00:50,043+0530 INFO  SetFieldValue Set: t=4.59375
+2013-03-07 17:00:50,043+0530 INFO  Tracef Equal start != mid  6 : 4 
+
+2013-03-07 17:00:50,043+0530 INFO  Tracef Equal start != mid  6 : 4 
+
+2013-03-07 17:00:50,043+0530 INFO  SetFieldValue Set: mid=5.140625
+2013-03-07 17:00:50,043+0530 INFO  SetFieldValue Set: mid=5.171875
+2013-03-07 17:00:50,044+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-2-1-2-0
+2013-03-07 17:00:50,044+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,044+0530 INFO  Tracef Start, Mid : (4, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:50,044+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,045+0530 INFO  SetFieldValue Set: t=6.234375
+2013-03-07 17:00:50,045+0530 INFO  SetFieldValue Set: t=6.421875
+2013-03-07 17:00:50,045+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-4-1-2-1-4-0
+2013-03-07 17:00:50,046+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-4-1-4-0
+2013-03-07 17:00:50,046+0530 INFO  SetFieldValue Set: t=6.140625
+2013-03-07 17:00:50,046+0530 INFO  SetFieldValue Set: t=6.171875
+2013-03-07 17:00:50,047+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-1-2
+2013-03-07 17:00:50,047+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-1-2
+2013-03-07 17:00:50,047+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:50,047+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-4-1-4-1-1
+2013-03-07 17:00:50,047+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-1-2
+2013-03-07 17:00:50,047+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:50,048+0530 INFO  Tracef Equal start != mid  5 : 5 
+
+2013-03-07 17:00:50,050+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-1-4
+2013-03-07 17:00:50,050+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-1-4
+2013-03-07 17:00:50,050+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-1-2
+2013-03-07 17:00:50,050+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-4-1-4-0
+2013-03-07 17:00:50,051+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-1-4
+2013-03-07 17:00:50,051+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-2-1-4-1-2
+2013-03-07 17:00:50,051+0530 INFO  Tracef Equal start != mid  2 : 1 
+
+2013-03-07 17:00:50,052+0530 DEBUG _add SCOPE thread=0-2-1-4-1-2-1-2-1-2-1-4-1-4
+2013-03-07 17:00:50,052+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-2-1-4-0
+2013-03-07 17:00:50,050+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-4-1-2-0
+2013-03-07 17:00:50,053+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,053+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-2-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:50,052+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-1-2
+2013-03-07 17:00:50,053+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-1-4
+2013-03-07 17:00:50,053+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-1-4
+2013-03-07 17:00:50,053+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,054+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-1-4
+2013-03-07 17:00:50,054+0530 INFO  Tracef Equal start != mid  1 : 1 
+
+2013-03-07 17:00:50,054+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-1-4
+2013-03-07 17:00:50,054+0530 INFO  _add STARTCOMPOUND thread=0-2-1-2-1-2-1-2-1-2-1-4-1-4-1 name=_add
+2013-03-07 17:00:50,054+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-4-1-2-1-2-1 name=_add
+2013-03-07 17:00:50,054+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,054+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,055+0530 INFO  SetFieldValue Set: mid=5.140625
+2013-03-07 17:00:50,055+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,052+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-1-2
+2013-03-07 17:00:50,051+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-4-1-2-1-4-1-2-0
+2013-03-07 17:00:50,059+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,054+0530 INFO  Tracef Start, Mid : (5, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:50,053+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-2-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,060+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,060+0530 DEBUG _add SCOPE thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-1-2
+2013-03-07 17:00:50,062+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-2-1-2-1-4-1-2-1-2-1-2-0
+2013-03-07 17:00:50,062+0530 INFO  SetFieldValue Set: t=6.140625
+2013-03-07 17:00:50,063+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-4-1-2-1-2-1-2-1-4-1-1
+2013-03-07 17:00:50,063+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-2-1-2-1-2-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,064+0530 INFO  Tracef Start, Mid : (4, 3)  Mid+1, End : (4, 3) 
+
+2013-03-07 17:00:50,064+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-2-1-2-1-2-1 name=_add
+2013-03-07 17:00:50,064+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-1-2-0 name=tracef
+2013-03-07 17:00:50,065+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,065+0530 INFO  Tracef Start, Mid : (5, 5)  Mid+1, End : (6, 5) 
+
+2013-03-07 17:00:50,065+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,065+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-4-1-4-1-4-1 name=_add
+2013-03-07 17:00:50,065+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-1-4-0 name=tracef
+2013-03-07 17:00:50,065+0530 INFO  Tracef Start, Mid : (6, 5)  Mid+1, End : (6, 4) 
+
+2013-03-07 17:00:50,066+0530 INFO  Tracef Start, Mid : (4, 4)  Mid+1, End : (5, 4) 
+
+2013-03-07 17:00:50,066+0530 DEBUG _add INTERNALPROC_END thread=0-2-1-4-1-2-1-2-1-2-1-4-1-1
+2013-03-07 17:00:50,066+0530 INFO  _add STARTCOMPOUND thread=0-2-1-4-1-4-1-4-1-2-1-2-1-4-1 name=_add
+2013-03-07 17:00:50,066+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-2-1-4-0 name=tracef
+2013-03-07 17:00:50,067+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-2-1-4-1-4-1-2-0 name=tracef
+2013-03-07 17:00:50,067+0530 DEBUG _add INTERNALPROC_START thread=0-2-1-4-1-4-1-2-1-4-1-2-1-2-1-2-0 name=tracef
