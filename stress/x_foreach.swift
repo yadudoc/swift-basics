@@ -2,15 +2,14 @@
 	Foreach loops with variable number of loops
 	to be called with cmdline arg -loops=<Number>
 
-#NIGHTLY 1000 10000 
-#WEEKLY  1000 10000 100000
+#NIGHTLY 10000 100000  
+#WEEKLY  1000 10000 1000000
 */
 
 int limit   = @toint(@arg("loops")); 
-int range[] = [0:limit:1];
 int result[];
 
-foreach num, index in range {
+foreach num, index in [1:limit:1] {
 	result[index] = index;
 }
 

@@ -1,0 +1,79 @@
+#!/bin/bash
+
+swiftscripts=$(echo *swift);
+
+
+function lookup_number {
+
+    eval "$1='1K'"
+    return 0
+
+}
+
+mkdir weekly
+mkdir nightly
+
+for script in $swiftscripts
+do
+    echo $script
+    scriptNoExt=${script%.swift};
+    scriptName=${scriptNoExt#x_};
+    echo "$script $scriptNoExt $scriptName"
+
+    loops_nightly=$(grep "#NIGHTLY" $script)
+    loops_nightly=($loops_nightly)
+
+    loops_weekly=$(grep "#WEEKLY" $script)
+    loops_weekly=($loops_weekly)
+
+    for loop in "${loops_nightly[@]}"
+    do
+        if [[ "$loop" =~ ^[0-9]+$ ]];
+        then
+            case "$loop" in
+                "1000")
+                    humannum="1K" ;;
+                "10000")
+                    humannum="10K" ;;
+                "100000")
+                    humannum="100K" ;;
+                "1000000")
+                    humannum="1M" ;;
+                "10000000")
+                    humannum="10M" ;;
+                *)
+                    humannum="$1" ;;
+            esac;
+            newscriptname="x$humannum-$scriptName.swift";
+            newargsname="x$humannum-$scriptName.args";
+            echo "cp $script nightly/$newscriptname"
+            echo "echo -loops=$loop >> nightly/$newargsname"
+        fi
+    done
+
+    for loop in "${loops_weekly[@]}"
+    do
+        if [[ "$loop" =~ ^[0-9]+$ ]];
+        then
+            case "$loop" in
+                "1000")
+                    humannum="1K" ;;
+                "10000")
+                    humannum="10K" ;;
+                "100000")
+                    humannum="100K" ;;
+                "1000000")
+                    humannum="1M" ;;
+                "10000000")
+                    humannum="10M" ;;
+                *)
+                    humannum="$1" ;;
+            esac;
+            newscriptname="x$humannum-$scriptName.swift";
+            newargsname="x$humannum-$scriptName.args";
+            echo "cp $script weekly/$newscriptname"
+            echo "echo -loops=$loop >> weekly/$newargsname"
+        fi
+    done
+
+done
